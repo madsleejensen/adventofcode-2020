@@ -61,7 +61,21 @@ object Day5 {
   def main(args: Array[String]): Unit = {
     val lines = Source.fromResource("day5/input.txt").getLines.toList
 
-    val partOne = lines.map(line => parse(line)).max
+    val passes = lines.map(line => parse(line))
+
+    val partOne = passes.max
     println(s"part-one: highest seat-id: $partOne")
+
+
+    val partTwo = (1 to passes.max).toList.find(id => {
+      if (passes.contains(id))
+        false
+      else
+        passes.contains(id - 1) && passes.contains(id + 1)
+    })
+
+    println(s"part-two: my seat-id: $partTwo")
+
+
   }
 }
